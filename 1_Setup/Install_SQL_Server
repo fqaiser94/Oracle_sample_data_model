@@ -1,0 +1,23 @@
+# Install SQL Server
+
+# Register the Microsoft SQL Server Ubuntu repository:
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+
+# This is the Cumulative Update (CU) repository. For more information about your repository options and their differences, see Change source repositories.
+sudo add-apt-repository "$(curl https://packages.microsoft.com/config/ubuntu/16.04/mssql-server-2017.list)"
+
+
+# Run the following commands to install SQL Server
+sudo apt-get update
+sudo apt-get install -y mssql-server
+
+# After the package installation finishes, run mssql-conf setup and follow the prompts to set the SA password and choose your edition.
+# If you are trying SQL Server 2017 in this tutorial, the following editions are freely licensed: Evaluation, Developer, and Express.
+# Make sure to specify a strong password for the SA account (Minimum length 8 characters, including uppercase and lowercase letters, base 10 digits and/or non-alphanumeric symbols).
+sudo /opt/mssql/bin/mssql-conf setup
+
+# Once the configuration is done, verify that the service is running:
+systemctl status mssql-server
+
+# At this point, SQL Server is running on your Ubuntu machine and is ready to use!
+# Install dbeaver or your favourite tool
